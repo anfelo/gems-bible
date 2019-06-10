@@ -1,1 +1,1 @@
-# A gems an cristals encyclopedia
+# A gems an crystals encyclopedia

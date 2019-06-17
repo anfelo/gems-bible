@@ -1,3 +1,6 @@
+let deferredPrompt;
+const button = document.querySelector('#a2hs');
+
 document.addEventListener('DOMContentLoaded', event => {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
@@ -12,4 +15,15 @@ document.addEventListener('DOMContentLoaded', event => {
     .catch(error => {
       console.log(error);
     });
+});
+
+window.addEventListener('beforeinstallprompt', event => {
+  event.preventDefault();
+  deferredPrompt = event;
+  button.style.display = 'block';
+});
+
+button.addEventListener('click', () => {
+  button.style.display = 'none';
+  deferredPrompt.preventDefault();
 });

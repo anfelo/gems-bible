@@ -3,6 +3,13 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const BundleAnalyzer = require('webpack-bundle-analyzer');
+
+const performanceConfig = {
+  hints: 'warning',
+  maxEntrypointSize: 50000,
+  maxAssetSize: 100000
+};
 
 module.exports = env => {
   const mode = env.mode ? env.mode : 'production';
@@ -29,8 +36,14 @@ module.exports = env => {
       new WorkboxPlugin.InjectManifest({
         swSrc: './src-sw.js',
         swDest: 'sw.js'
+      }),
+      new BundleAnalyzer.BundleAnalyzerPlugin({
+        analyzerMode: 'static',
+        openAnalyzer: false,
+        reportFilename: 'bundle-analyzer.html'
       })
     ],
-    devtool: 'source-map'
+    devtool: 'source-map',
+    performance: mode === 'production' ? performanceConfig : {}
   };
 };

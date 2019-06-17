@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="description" content="A gems an cristals encyclopedia">
-  <title>Gems Deck</title>
+  <title>Gemsdeck</title>
   <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
   <script defer src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
   <!-- Add Firebase products that you want to use -->
@@ -38,6 +38,16 @@
       color: var(--dark);
       font-size: 22px;
       font-weight: 600;
+    }
+
+    .navbar-brand {
+      width: 45px;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-brand>img {
+      width: 100%;
     }
 
     #screens {
@@ -82,6 +92,31 @@
         colors 5.6s ease-in-out infinite;
     }
 
+    .button {
+      background-color: #fff;
+      border: none;
+      font-size: 1.3em;
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .is-rounded {
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+    }
+
+    .is-primary {
+      background-color: #4285f4;
+      color: white;
+    }
+
+    #a2hs {
+      display: none;
+      position: absolute;
+      top: 10px;
+      right: 15px;
+    }
+
     @keyframes colors {
       0% {
         stroke: #4285f4;
@@ -120,11 +155,25 @@
       }
     }
   </style>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/favicons/site.webmanifest">
+  <link rel="mask-icon" href="/assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#5ed6cd">
+  <meta name="msapplication-config" content="/assets/favicons/browserconfig.xml">
+  <meta name="theme-color" content="#5ed6cd">
 </head>
 
 <body>
   <!--- app shell HTML  --->
-  <nav id="navbar">Gemstones</nav>
+  <button id="a2hs" class="button is-primary is-rounded" type="button">✚</button>
+  <nav id="navbar" class="navbar">
+    <div class="navbar-brand"><img src="/assets/logo.png" alt="Gemsdeck logo image"></div>
+    <div class="navbar-title">Gemstones</div>
+  </nav>
   <main id="screens">
     <div id="screen-gems" class="screen">
       <div class="spinner-container">
@@ -158,13 +207,13 @@
     };
   };
   const screens = document.querySelector("#screens");
-  const navbar = document.querySelector("#navbar");
+  const navbarTitle = document.querySelector(".navbar .navbar-title");
 
   const pageNames = ["Gemstones", "Favorites"];
 
   const pageTransition = debounce(() => {
     const index = Math.round(screens.scrollLeft / window.innerWidth);
-    navbar.textContent = pageNames[index];
+    navbarTitle.textContent = pageNames[index];
   }, 60);
   screens.addEventListener("scroll", pageTransition);
 </script>
